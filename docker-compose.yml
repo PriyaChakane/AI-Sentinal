@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: mlobserve_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mlobserve
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: ./backend
+    container_name: mlobserve_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/mlobserve
+      SMTP_SERVER: ${SMTP_SERVER:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-super-secret-key-change-this}
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - ./backend/app/uploads:/app/app/uploads   # ✅ Persist ML uploads
+
+  frontend:
+    build: ./frontend
+    container_name: mlobserve_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    depends_on:
+      - backend
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:

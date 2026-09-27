@@ -1,0 +1,14 @@
+flask
+flask-cors
+psycopg2-binary
+python-dotenv
+flask-jwt-extended
+werkzeug
+pandas
+numpy
+scipy
+scikit-learn
+joblib
+shap
+lime
+gunicorn
