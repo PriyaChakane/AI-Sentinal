@@ -1,203 +1,152 @@
-⚡ ML-Observe — Full-Stack ML Model Observability Platform
+# ⚡ AI-Sentinel
 
-ML-Observe is a full-stack machine learning observability platform built to monitor the health, reliability, and performance of ML models and datasets after deployment.
+### Intelligent ML Monitoring, Reliability & Explainability Platform
 
-The platform provides a centralized environment for model and dataset management, data quality analysis, drift detection, performance monitoring, explainability, fairness evaluation, alert generation, and business-impact assessment. It helps ML engineers identify changes in data and model behavior and provides monitoring insights through an interactive dashboard.
+AI-Sentinel is a full-stack machine learning monitoring platform designed to observe ML models and datasets after deployment. It brings model management, data validation, drift analysis, performance tracking, explainability, fairness checks, alerting, and business-impact analysis into a single dashboard.
 
-ML-Observe integrates ML model management, dataset analysis, data and concept drift detection, performance tracking, explainable AI, bias monitoring, alerting, and business-impact analysis into a Dockerized full-stack architecture.
+The platform is intended to help ML engineers understand how models behave in changing production environments and identify potential reliability issues before they become larger problems.
+
 ---
 
-## 🎯 Problem Statement
+## 🎯 Why AI-Sentinel?
 
-Building and deploying a machine learning model is only the beginning of the ML lifecycle.
+Training a machine learning model successfully does not guarantee that it will continue performing well after deployment.
 
-A model that performs well during training may lose effectiveness after deployment because real-world data changes over time.
+Production environments continuously change. Incoming data may have different distributions, important features may become unreliable, model accuracy may decline, and prediction behavior may vary across different groups.
 
-Common production ML problems include:
-
-- Changes in incoming feature distributions
-- Changes in relationships between features and target variables
-- Missing, corrupted, or unexpected input data
-- Schema changes between training and production data
-- Increasing false-positive or false-negative rates
-- Model performance degradation over time
-- Performance differences across demographic groups
-- Changes in feature importance and model behavior
-- Lack of visibility into prediction failures
-- Delayed identification of production model issues
-
-Traditional ML development often follows:
+AI-Sentinel focuses on the monitoring stage of the ML lifecycle:
 
 ```text
-Dataset
-    │
-    ▼
+Data
+  ↓
 Model Training
-    │
-    ▼
+  ↓
 Model Evaluation
-    │
-    ▼
+  ↓
 Deployment
-```
-
-However, a production ML lifecycle should continue after deployment:
-
-```text
-Dataset
-    │
-    ▼
-Model Training
-    │
-    ▼
-Model Evaluation
-    │
-    ▼
-Deployment
-    │
-    ▼
+  ↓
 Production Predictions
-    │
-    ▼
+  ↓
 Continuous Monitoring
-    │
-    ├── Data Quality
-    ├── Data Drift
-    ├── Concept Drift
-    ├── Performance Degradation
-    ├── Explainability
-    ├── Bias & Fairness
-    ├── Alert Generation
-    └── Business Impact Analysis
+  ├── Data Quality
+  ├── Data Drift
+  ├── Concept Drift
+  ├── Model Performance
+  ├── Explainability
+  ├── Fairness
+  ├── Alerts
+  └── Business Impact
 ```
 
-**ML-Observe aims to provide a centralized observability layer for monitoring ML systems throughout their post-deployment lifecycle.**
+The objective is to provide a centralized monitoring layer that helps users understand whether an ML system is still behaving as expected.
 
 ---
 
-# ⚙️ Tech Stack
+# 🧰 Technology Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | Next.js + React + TypeScript |
-| Styling | Tailwind CSS |
-| UI Components | shadcn/ui |
-| Icons | Lucide React |
-| Charts | Recharts |
-| Backend | Flask |
-| Authentication | Flask-JWT-Extended |
-| Password Security | Werkzeug Password Hashing |
-| Database | PostgreSQL |
-| Database Driver | psycopg2 |
-| ML Processing | scikit-learn |
-| Data Processing | Pandas + NumPy |
-| Model Serialization | Pickle / Joblib |
-| Containerization | Docker |
-| Service Orchestration | Docker Compose |
-| Architecture | REST-based Client-Server Architecture |
+| Component         | Technology                 |
+| ----------------- | -------------------------- |
+| Frontend          | Next.js, React, TypeScript |
+| UI Styling        | Tailwind CSS               |
+| Component Library | shadcn/ui                  |
+| Icons             | Lucide React               |
+| Visualization     | Recharts                   |
+| Backend           | Flask                      |
+| Authentication    | Flask-JWT-Extended         |
+| Password Security | Werkzeug                   |
+| Database          | PostgreSQL                 |
+| Database Driver   | psycopg2                   |
+| ML Processing     | scikit-learn               |
+| Data Processing   | Pandas, NumPy              |
+| Model Files       | Pickle / Joblib            |
+| Containers        | Docker                     |
+| Orchestration     | Docker Compose             |
+| Communication     | REST APIs                  |
 
 ---
 
-# ✨ Core Features
+# ✨ Platform Capabilities
 
-## 🔐 Authentication & Access Control
+## 🔐 User Authentication
 
-ML-Observe includes a secure authentication workflow for user registration and login.
+AI-Sentinel includes an authentication layer for controlling access to the monitoring dashboard.
 
-The current authentication architecture includes:
+The authentication system supports:
 
-- User registration
-- User login
-- Password hashing
-- PostgreSQL user storage
-- JWT access-token generation
-- Protected Flask routes
-- Frontend authentication state
-- Browser token persistence
-- Authenticated dashboard access
+* User registration
+* User login
+* Password hashing
+* PostgreSQL-based user records
+* JWT token creation
+* Protected backend endpoints
+* Frontend authentication state
+* Persistent browser authentication
+* Secure dashboard access
 
-### Authentication Flow
+### Authentication Process
 
 ```text
-User Registration
-        │
-        ▼
-Input Validation
-        │
-        ▼
-Password Hashing
-        │
-        ▼
-PostgreSQL Storage
-        │
-        ▼
-User Login
-        │
-        ▼
-Credential Verification
-        │
-        ▼
-JWT Token Generation
-        │
-        ▼
-Authenticated Dashboard Access
+Registration
+     ↓
+Validate User Data
+     ↓
+Hash Password
+     ↓
+Store User
+     ↓
+Login
+     ↓
+Verify Credentials
+     ↓
+Generate JWT
+     ↓
+Open Protected Dashboard
 ```
 
-Passwords are stored as secure password hashes rather than plain text.
+Passwords are stored using password hashes instead of plain-text credentials.
 
 ---
 
-## 📦 Model Management
+## 📦 ML Model Management
 
-The Model Management module acts as the central entry point for registering and monitoring machine learning models.
+The Model Management section provides a central location for registering and monitoring machine learning models.
 
-The target workflow is:
+The intended process is:
 
 ```text
-Authenticated User
-        │
-        ▼
-Upload ML Model
-        │
-        ▼
-Validate File
-        │
-        ▼
+Upload Model
+     ↓
+Validate Model File
+     ↓
 Store Model Artifact
-        │
-        ▼
+     ↓
 Save Model Metadata
-        │
-        ▼
-Upload Monitoring Dataset
-        │
-        ▼
-Validate Model-Data Compatibility
-        │
-        ▼
-Run Model Evaluation
-        │
-        ▼
-Generate Monitoring Results
-        │
-        ▼
-Display Results in Dashboard
+     ↓
+Attach Dataset
+     ↓
+Validate Compatibility
+     ↓
+Run Monitoring
+     ↓
+Generate Results
+     ↓
+Display Dashboard Metrics
 ```
 
-The model management interface is designed to support:
+Model management includes functionality for:
 
-- Model upload
-- Model listing
-- Model metadata display
-- Model monitoring
-- Model comparison
-- Model deletion
-- Model version tracking
-- Monitoring status display
+* Uploading models
+* Viewing registered models
+* Displaying model information
+* Monitoring model status
+* Comparing models
+* Removing models
+* Tracking model versions
+* Viewing monitoring activity
 
-Initial monitoring support is focused on compatible tabular machine learning models.
+The initial implementation focuses on tabular ML models compatible with scikit-learn.
 
-Planned model-format support includes:
+Supported or planned model formats include:
 
 ```text
 .pkl
@@ -207,501 +156,436 @@ Planned model-format support includes:
 .pt
 ```
 
-Different model frameworks require separate loading and monitoring adapters. Therefore, the monitoring engine is being developed incrementally, beginning with scikit-learn-compatible models.
+Model loading and monitoring depend on the framework and serialization format.
 
 ---
 
-## 📁 Dataset Management
+# 📁 Dataset Monitoring
 
-ML-Observe is designed to accept datasets associated with uploaded ML models.
+Datasets play an important role in determining whether a deployed ML model continues to operate correctly.
 
-A complete monitoring process generally requires two dataset roles:
+AI-Sentinel uses two main dataset concepts.
 
 ### Reference Dataset
 
-The reference dataset represents the baseline distribution used for comparison.
+The reference dataset represents the baseline distribution against which new observations are compared.
 
-It may contain:
+Possible sources include:
 
-- Training data
-- Validation data
-- Historical production data
-- Previously accepted production distributions
+* Training datasets
+* Validation datasets
+* Historical production data
+* Previously approved production distributions
 
 ### Current Dataset
 
-The current dataset represents recent production observations.
+The current dataset represents recent or newly collected production observations.
 
-The monitoring engine compares both datasets:
+The monitoring process compares the two:
 
 ```text
-Reference Dataset
-        │
-        │
-        ▼
-   Comparison Engine
-        ▲
-        │
-        │
-Current Dataset
-        │
-        ▼
-Monitoring Results
+Reference Data ─────┐
+                    │
+                    ▼
+              Comparison Engine
+                    ▲
+                    │
+Current Data ───────┘
+                    ↓
+             Monitoring Results
 ```
 
-The dataset monitoring workflow is designed to perform:
+Dataset analysis can include:
 
-- Schema validation
-- Missing-value analysis
-- Duplicate detection
-- Data-type validation
-- Distribution comparison
-- Feature drift detection
-- Model prediction generation
-- Performance evaluation
-- Quality scoring
+* Schema validation
+* Missing-value inspection
+* Duplicate checking
+* Data-type verification
+* Distribution comparison
+* Feature drift detection
+* Prediction generation
+* Performance measurement
+* Data quality scoring
 
 ---
 
-## 📊 Data Quality Monitoring
+# 📊 Data Quality Checks
 
-Production data quality problems can affect model reliability even when the model itself has not changed.
+Poor-quality input data can affect model predictions even when the underlying model has not changed.
 
-The Data Quality module is designed to detect issues such as:
+The data quality layer is designed to identify:
 
-- Missing values
-- Duplicate rows
-- Unexpected null-rate increases
-- Data-type mismatches
-- Missing columns
-- Unexpected columns
-- Constant features
-- Invalid numerical ranges
-- New categorical values
-- Outlier changes
-- Dataset schema changes
+* Missing values
+* Duplicate records
+* Unexpected null rates
+* Incorrect data types
+* Missing columns
+* Additional columns
+* Constant-value features
+* Invalid numeric ranges
+* Unexpected categorical values
+* Outlier changes
+* Schema inconsistencies
 
-### Data Quality Workflow
+### Quality Analysis Flow
 
 ```text
-Uploaded Dataset
-        │
-        ▼
+Dataset
+  ↓
 Schema Inspection
-        │
-        ▼
+  ↓
 Quality Analysis
-        │
-        ├── Missing Value Check
-        ├── Duplicate Detection
-        ├── Type Validation
-        ├── Column Validation
-        ├── Range Analysis
-        └── Category Validation
-        │
-        ▼
-Data Quality Metrics
-        │
-        ▼
-Quality Score & Warnings
+  ├── Missing Values
+  ├── Duplicate Rows
+  ├── Data Types
+  ├── Column Validation
+  ├── Range Checks
+  └── Category Checks
+  ↓
+Quality Metrics
+  ↓
+Warnings & Quality Score
 ```
 
-The goal is to replace static dashboard values with quality metrics calculated directly from uploaded datasets.
+The goal is to calculate monitoring information from actual datasets rather than relying only on static dashboard values.
 
 ---
 
-## 📈 Data Drift Detection
+# 📈 Data Drift Analysis
 
-Data drift occurs when the statistical distribution of production data changes compared with the model's reference data.
+Data drift occurs when the distribution of production inputs changes relative to the data used as a reference.
 
-Example:
+For example:
 
 ```text
 Reference Distribution
-          │
-          │
-          ▼
-     Drift Engine
-          ▲
-          │
-          │
+          ↓
+     Drift Analysis
+          ↑
 Current Distribution
+          ↓
+Drift Results
 ```
 
-The Data Drift module is designed to provide:
+The monitoring interface is designed to show:
 
-- Dataset-level drift status
-- Feature-level drift scores
-- Number of drifted features
-- Drift severity
-- Distribution comparison
-- Feature drift ranking
-- Statistical evidence
+* Overall drift status
+* Feature-level drift
+* Drift scores
+* Number of affected features
+* Drift severity
+* Distribution comparisons
+* Ranking of changed features
+* Statistical evidence
 
-Planned statistical methods include:
+Possible statistical techniques include:
 
-- Population Stability Index (PSI)
-- Kolmogorov-Smirnov Test
-- Chi-Square Test
-- Jensen-Shannon Divergence
-- Wasserstein Distance
+* Population Stability Index (PSI)
+* Kolmogorov-Smirnov Test
+* Chi-Square Test
+* Jensen-Shannon Divergence
+* Wasserstein Distance
 
-The appropriate statistical method depends on the feature type and monitoring configuration.
+The selected method depends on the feature type and monitoring configuration.
 
 ---
 
-## 📉 Concept Drift & Performance Monitoring
+# 📉 Model Performance & Concept Drift
 
-Concept drift refers to changes in the relationship between model inputs and target outcomes.
+A model may experience performance degradation even when its input data appears valid.
 
-ML-Observe's Concept Drift and Performance module is designed to track whether a model's predictive performance changes over time.
+Concept drift refers to changes in the relationship between input variables and the target outcome.
 
-The monitoring workflow is:
+AI-Sentinel is designed to evaluate model performance using labeled monitoring data.
 
 ```text
-Uploaded Model
-       +
-Monitoring Dataset
-       +
-Ground Truth Labels
-        │
-        ▼
-Generate Predictions
-        │
-        ▼
-Calculate Metrics
-        │
-        ├── Accuracy
-        ├── Precision
-        ├── Recall
-        ├── F1 Score
-        ├── ROC-AUC
-        └── Confusion Matrix
-        │
-        ▼
-Compare With Baseline
-        │
-        ▼
-Calculate Performance Change
-        │
-        ▼
-Detect Significant Degradation
-        │
-        ▼
-Generate Monitoring Recommendations
+Model + Monitoring Dataset + Ground Truth
+                    ↓
+             Generate Predictions
+                    ↓
+              Calculate Metrics
+                    ↓
+       ┌────────────┬────────────┐
+       ↓            ↓            ↓
+   Accuracy     Precision      Recall
+       ↓            ↓            ↓
+     F1 Score      ROC-AUC   Confusion Matrix
+                    ↓
+            Compare Baseline
+                    ↓
+          Detect Performance Change
+                    ↓
+          Monitoring Recommendations
 ```
 
-The dashboard is designed to visualize:
+Performance monitoring can include:
 
-- Accuracy changes
-- Precision degradation
-- Recall degradation
-- F1-score changes
-- ROC-AUC shifts
-- Confusion matrix changes
-- Per-class accuracy
-- Baseline vs current performance
-- Performance trends
-- Drift severity
-- Monitoring recommendations
+* Accuracy
+* Precision
+* Recall
+* F1 score
+* ROC-AUC
+* Confusion matrix
+* Class-level performance
+* Baseline comparison
+* Performance trends
+* Degradation indicators
+* Monitoring recommendations
 
-The frontend Concept Drift dashboard currently provides the visualization layer. Backend integration is being developed to replace demonstration values with actual metrics generated from uploaded models and labeled datasets.
+The Concept Drift dashboard provides the visualization layer, while backend integration is being developed to calculate metrics from uploaded models and datasets.
 
 ---
 
-## 🔍 Explainability Engine
+# 🔍 Explainable AI
 
-Model performance metrics explain **what changed**, but they do not always explain **why the model behaved differently**.
+Performance metrics can show that something changed, but explainability helps investigate **why** predictions changed.
 
-The Explainability Engine is designed to help analyze prediction behavior.
-
-### Explainability Workflow
+The Explainability module is intended to provide both global and individual prediction insights.
 
 ```text
-ML Model
-    +
+Model
+  +
 Dataset
-    │
-    ▼
-Explainability Engine
-    │
-    ├── Global Feature Importance
-    ├── Local Prediction Explanation
-    ├── Feature Contribution Analysis
-    └── Explanation Comparison
-    │
-    ▼
-Interactive Explanation Dashboard
+  ↓
+Explainability Layer
+  ├── Global Feature Importance
+  ├── Local Explanations
+  ├── Feature Contributions
+  └── Explanation Comparison
+  ↓
+Interactive Dashboard
 ```
 
-Planned explainability methods include:
+Potential explanation techniques include:
 
-- SHAP for compatible models
-- LIME
-- Native model feature importance
-- Permutation importance
-- Local feature contribution analysis
+* SHAP
+* LIME
+* Native feature importance
+* Permutation importance
+* Local feature contribution analysis
 
-The explanation method will depend on model compatibility and model framework.
+The selected technique depends on the model architecture and framework.
 
-The module is intended to answer questions such as:
+The module is designed to answer questions such as:
 
 ```text
-Which features influence the model most?
+Which features influence predictions the most?
 
-Why did the model make this prediction?
+Why did the model produce this prediction?
 
-Has feature importance changed over time?
+Have important features changed over time?
 
-Which features are contributing to degraded predictions?
+Which variables may be contributing to poor predictions?
 ```
 
 ---
 
-## ⚖️ Bias & Fairness Monitoring
+# ⚖️ Fairness & Bias Analysis
 
-A model can maintain good overall accuracy while performing differently across user groups.
+Overall model performance does not always represent performance across individual groups.
 
-The Bias Monitoring module is designed to compare model behavior across user-defined sensitive attributes.
-
-Example workflow:
+The fairness monitoring component allows users to compare model results across selected sensitive attributes.
 
 ```text
-Model Predictions
-        │
-        ▼
+Predictions
+    ↓
 Select Sensitive Attribute
-        │
-        ▼
+    ↓
 Create Comparison Groups
-        │
-        ▼
-Group-Level Metric Calculation
-        │
-        ├── Accuracy
-        ├── Selection Rate
-        ├── True Positive Rate
-        ├── False Positive Rate
-        └── Performance Difference
-        │
-        ▼
-Fairness Evaluation
-        │
-        ▼
-Bias Warning
+    ↓
+Calculate Group Metrics
+    ├── Accuracy
+    ├── Selection Rate
+    ├── True Positive Rate
+    ├── False Positive Rate
+    └── Performance Difference
+    ↓
+Fairness Analysis
+    ↓
+Potential Bias Indicators
 ```
 
-Planned fairness indicators include:
+Potential fairness measurements include:
 
-- Demographic parity difference
-- Equal opportunity difference
-- Selection-rate comparison
-- Group accuracy difference
-- False-positive-rate difference
-- True-positive-rate difference
+* Demographic parity difference
+* Equal opportunity difference
+* Selection-rate comparison
+* Group accuracy difference
+* False-positive-rate difference
+* True-positive-rate difference
 
-The platform does not make automatic fairness guarantees. The purpose of the module is to expose measurable differences for further investigation.
+These measurements are intended to highlight measurable differences between groups for further investigation. They do not automatically establish that a model is fair or unfair.
 
 ---
 
-## 🚨 Alert System
+# 🚨 Monitoring Alerts
 
-Monitoring metrics are useful only when important changes can be identified and acted upon.
+Monitoring becomes more useful when important changes can be surfaced automatically.
 
-The Alert System is designed to convert monitoring results into actionable warnings.
-
-### Alert Flow
+The alert layer evaluates monitoring metrics against configured thresholds.
 
 ```text
-Monitoring Results
-        │
-        ▼
+Monitoring Metrics
+       ↓
 Threshold Evaluation
-        │
-        ├── Data Drift Threshold
-        ├── Data Quality Threshold
-        ├── Accuracy Threshold
-        ├── Bias Threshold
-        └── Performance Threshold
-        │
-        ▼
+       ├── Data Quality
+       ├── Data Drift
+       ├── Accuracy
+       ├── Bias
+       └── Performance
+       ↓
 Alert Generation
-        │
-        ├── Low
-        ├── Medium
-        ├── High
-        └── Critical
-        │
-        ▼
+       ├── Low
+       ├── Medium
+       ├── High
+       └── Critical
+       ↓
 Alert Dashboard
 ```
 
-Example alerts:
+Example notifications:
 
 ```text
 HIGH
-Precision degradation exceeded the configured threshold.
+Model precision has fallen below the configured threshold.
 
 MEDIUM
-Feature "monthly_charges" shows significant distribution shift.
+A feature has experienced significant distribution change.
 
 CRITICAL
-Data quality score dropped below the acceptable threshold.
+Dataset quality has dropped below the accepted level.
 
 HIGH
-Group-level false-positive rate difference requires investigation.
+A measurable difference has been detected between selected groups.
 ```
 
-Future alerting capabilities may include:
+Planned alert functionality includes:
 
-- Email notifications
-- Alert history
-- Alert acknowledgement
-- Configurable thresholds
-- Monitoring-rule configuration
+* Email notifications
+* Alert history
+* Alert acknowledgement
+* Configurable thresholds
+* Monitoring rule configuration
 
 ---
 
-## 💼 Business Impact Analysis
+# 💼 Business Impact Monitoring
 
-Technical model degradation can affect real business outcomes.
+Technical model metrics can eventually affect real-world business outcomes.
 
-The Business Impact module is designed to connect ML monitoring signals with configurable business metrics.
-
-Example:
+The Business Impact section is designed to connect model monitoring results with domain-specific consequences.
 
 ```text
-Model Performance Degradation
-             │
-             ▼
-Prediction Error Increase
-             │
-             ▼
-Business Metric Mapping
-             │
-             ├── Revenue Impact
-             ├── Customer Impact
-             ├── Operational Cost
-             └── Risk Exposure
-             │
-             ▼
-Business Impact Dashboard
+Model Degradation
+       ↓
+Prediction Errors
+       ↓
+Business Metric
+       ↓
+Potential Impact
+       ├── Revenue
+       ├── Customers
+       ├── Operational Cost
+       └── Risk
 ```
 
-Potential use cases include:
-
-### Customer Churn
+### Example: Customer Churn
 
 ```text
-Recall Drop
-    │
-    ▼
-More Missed Churn Customers
-    │
-    ▼
-Reduced Retention Opportunities
-    │
-    ▼
-Potential Revenue Loss
+Recall Decreases
+      ↓
+More Churn Customers Missed
+      ↓
+Fewer Retention Opportunities
+      ↓
+Potential Revenue Impact
 ```
 
-### Fraud Detection
+### Example: Fraud Detection
 
 ```text
-False Negative Increase
-        │
-        ▼
-More Undetected Fraud
-        │
-        ▼
-Higher Financial Risk
+False Negatives Increase
+      ↓
+More Fraud Cases Missed
+      ↓
+Higher Financial Exposure
 ```
 
-### Demand Forecasting
+### Example: Demand Forecasting
 
 ```text
-Forecast Error Increase
-        │
-        ▼
-Inventory Planning Errors
-        │
-        ▼
-Stockouts or Excess Inventory
+Forecast Error Increases
+      ↓
+Poor Inventory Planning
+      ↓
+Stockouts / Excess Inventory
 ```
 
-Business-impact calculations depend on domain-specific assumptions and should be configured for the monitored use case.
+Business impact calculations depend on the assumptions and metrics defined for each individual use case.
 
 ---
 
-# 🏗️ System Architecture
+# 🏗️ Application Architecture
 
 ```text
-┌────────────────────────────────────────────────────┐
-│                       USER                         │
-└────────────────────────┬───────────────────────────┘
-                         │
-                         ▼
-┌────────────────────────────────────────────────────┐
-│             NEXT.JS + REACT FRONTEND               │
-│                                                    │
-│  Authentication                                    │
-│  Dashboard                                         │
-│  Model Management                                  │
-│  Data Quality                                      │
-│  Data Drift Detection                              │
-│  Concept Drift & Performance                       │
-│  Explainability Engine                             │
-│  Bias Monitoring                                   │
-│  Alert System                                      │
-│  Business Impact                                   │
-└────────────────────────┬───────────────────────────┘
-                         │
-                         │ HTTP Requests
-                         ▼
-┌────────────────────────────────────────────────────┐
-│                   FLASK BACKEND                    │
-│                                                    │
-│  Authentication Blueprint                          │
-│  JWT Authentication                                │
-│  Upload Blueprint                                  │
-│  Model Management                                  │
-│  Dataset Processing                                │
-│  Monitoring Services                               │
-│  Protected Routes                                  │
-└──────────────────┬─────────────────┬───────────────┘
-                   │                 │
-                   ▼                 ▼
-        ┌──────────────────┐  ┌──────────────────────┐
-        │    PostgreSQL    │  │    Upload Storage    │
-        │                  │  │                      │
-        │ Users            │  │ Model Artifacts      │
-        │ Model Metadata   │  │ Dataset Files        │
-        │ Dataset Metadata │  │                      │
-        │ Monitoring Runs  │  │                      │
-        │ Alert History    │  │                      │
-        └─────────┬────────┘  └──────────┬───────────┘
-                  │                      │
-                  └──────────┬───────────┘
-                             │
-                             ▼
-                  ┌──────────────────────┐
-                  │  Monitoring Engine   │
-                  │                      │
-                  │ Data Quality         │
-                  │ Data Drift           │
-                  │ Performance          │
-                  │ Concept Drift        │
-                  │ Explainability       │
-                  │ Fairness             │
-                  └──────────┬───────────┘
-                             │
-                             ▼
-                  ┌──────────────────────┐
-                  │ Monitoring Results   │
-                  │ Alerts               │
-                  │ Recommendations      │
-                  │ Dashboard Metrics    │
-                  └──────────────────────┘
+                     USER
+                      │
+                      ▼
+        ┌──────────────────────────┐
+        │ Next.js / React Frontend │
+        │                          │
+        │ Dashboard                │
+        │ Authentication           │
+        │ Model Management         │
+        │ Data Quality             │
+        │ Drift Monitoring         │
+        │ Explainability           │
+        │ Fairness                 │
+        │ Alerts                   │
+        │ Business Impact          │
+        └────────────┬─────────────┘
+                     │
+                  REST API
+                     │
+                     ▼
+        ┌──────────────────────────┐
+        │       Flask Backend      │
+        │                          │
+        │ Authentication           │
+        │ JWT Security             │
+        │ Model APIs               │
+        │ Dataset APIs             │
+        │ Monitoring Services      │
+        └────────────┬─────────────┘
+                     │
+          ┌──────────┴──────────┐
+          ▼                     ▼
+   ┌───────────────┐     ┌───────────────┐
+   │  PostgreSQL   │     │ File Storage  │
+   │               │     │               │
+   │ Users         │     │ ML Models     │
+   │ Metadata      │     │ Datasets      │
+   │ Monitoring    │     │               │
+   │ Alerts        │     │               │
+   └───────┬───────┘     └───────┬───────┘
+           │                       │
+           └──────────┬────────────┘
+                      ▼
+             Monitoring Engine
+                      │
+       ┌──────────────┼──────────────┐
+       ▼              ▼              ▼
+   Data Quality     Drift       Performance
+       │              │              │
+       └──────────────┼──────────────┘
+                      ▼
+             Explainability
+                      │
+                      ▼
+                Fairness
+                      │
+                      ▼
+                  Alerts
 ```
 
 ---
@@ -709,392 +593,224 @@ Business-impact calculations depend on domain-specific assumptions and should be
 # 📁 Project Structure
 
 ```text
-ML-OBSERVE/
-│
-├── backend/
-│   │
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py
-│   │   ├── auth.py
-│   │   ├── config.py
-│   │   ├── models.py
-│   │   ├── upload.py
-│   │   │
-│   │   └── uploads/
-│   │       ├── datasets/
-│   │       └── models/
-│   │
-│   ├── Dockerfile
-│   └── requirements.txt
-│
-├── db/
-│   └── init.sql
+AI-Sentinal/
 │
 ├── frontend/
-│   │
 │   ├── app/
-│   │   ├── page.tsx
-│   │   ├── layout.tsx
-│   │   ├── globals.css
-│   │   │
-│   │   ├── login/
-│   │   │   └── page.tsx
-│   │   │
-│   │   └── register/
-│   │       └── page.tsx
-│   │
 │   ├── components/
-│   │   ├── auth-form.tsx
-│   │   ├── dashboard.tsx
-│   │   ├── model-management.tsx
-│   │   ├── data-quality.tsx
-│   │   ├── drift-detection.tsx
-│   │   ├── concept-drift.tsx
-│   │   ├── explainability-engine.tsx
-│   │   ├── bias-monitoring.tsx
-│   │   ├── alert-system.tsx
-│   │   ├── business-impact.tsx
-│   │   ├── sidebar.tsx
-│   │   ├── theme-provider.tsx
-│   │   ├── verification-required.tsx
-│   │   │
-│   │   └── ui/
-│   │
 │   ├── hooks/
 │   ├── lib/
 │   ├── public/
 │   ├── styles/
-│   │
-│   ├── Dockerfile
 │   ├── package.json
 │   └── tsconfig.json
 │
-├── .env
+├── backend/
+│   ├── app/
+│   ├── routes/
+│   ├── services/
+│   ├── models/
+│   ├── schemas/
+│   └── requirements.txt
+│
 ├── docker-compose.yml
-└── README.md
+├── Dockerfile
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-# 🔌 Backend Routes
+# 🔌 Backend API
 
-## Authentication Routes
+The backend follows a REST-oriented structure.
 
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/auth/register` | Register a new user |
-| POST | `/auth/login` | Authenticate user and return JWT |
-| GET | `/protected` | Test authenticated access |
-
----
-
-## System Routes
-
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/` | Backend status |
-| GET | `/health` | Backend health check |
-
----
-
-## Model & Dataset Upload Routes
-
-The model and dataset upload pipeline is under active integration.
-
-The target route architecture includes:
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/upload/model` | Upload ML model artifact |
-| POST | `/upload/dataset` | Upload monitoring dataset |
-| GET | `/upload/models` | List uploaded models |
-| GET | `/upload/datasets` | List uploaded datasets |
-| DELETE | `/upload/model/{id}` | Delete model |
-| DELETE | `/upload/dataset/{id}` | Delete dataset |
-
----
-
-## Planned Monitoring Routes
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/monitor/data-quality` | Analyze dataset quality |
-| POST | `/monitor/data-drift` | Compare reference and current datasets |
-| POST | `/monitor/performance` | Calculate model performance |
-| POST | `/monitor/concept-drift` | Compare baseline and current performance |
-| POST | `/monitor/explainability` | Generate model explanations |
-| POST | `/monitor/fairness` | Evaluate group fairness |
-| GET | `/alerts` | Retrieve generated monitoring alerts |
-
----
-
-# 🐳 Docker Architecture
-
-ML-Observe runs through Docker Compose using three coordinated services.
+## Authentication
 
 ```text
-docker-compose.yml
-        │
-        ├── PostgreSQL Database
-        │       Port: 5432
-        │
-        ├── Flask Backend
-        │       Port: 8000
-        │
-        └── Next.js Frontend
-                Port: 3000
+POST /api/auth/register
+POST /api/auth/login
 ```
 
-The Docker services communicate through the internal Docker network.
+These endpoints handle user registration and authentication.
 
-The Flask backend connects to PostgreSQL using the database service hostname:
+## System
 
 ```text
-postgresql://postgres:postgres@db:5432/mlobserve
+GET /api/health
+GET /api/status
 ```
 
-Uploaded model and dataset files are persisted through a mounted Docker volume:
+System endpoints provide application and service status information.
+
+## Model & Dataset Operations
+
+The platform provides API support for:
 
 ```text
-Host Directory:
+Model Upload
+Model Listing
+Model Details
+Model Deletion
 
-backend/app/uploads/
-
-Container Directory:
-
-/app/app/uploads/
-```
-
-The upload structure is:
-
-```text
-uploads/
-│
-├── models/
-│
-└── datasets/
-```
-
-This prevents uploaded monitoring artifacts from existing only inside the temporary container filesystem.
-
----
-
-# 🔄 End-to-End Monitoring Workflow
-
-The target complete workflow of ML-Observe is:
-
-```text
-User Registration
-        │
-        ▼
-User Login
-        │
-        ▼
-JWT Authentication
-        │
-        ▼
-Upload ML Model
-        │
-        ▼
-Model File Validation
-        │
-        ▼
-Store Model Artifact
-        │
-        ▼
-Save Model Metadata
-        │
-        ▼
-Upload Reference Dataset
-        │
-        ▼
-Upload Current Dataset
-        │
-        ▼
+Dataset Upload
 Dataset Validation
-        │
-        ▼
-Model-Data Compatibility Check
-        │
-        ▼
-Generate Predictions
-        │
-        ▼
-Monitoring Engine
-        │
-        ├─────────────────────────────────────┐
-        │                                     │
-        ▼                                     ▼
-Data Quality Analysis                  Data Drift Analysis
-        │                                     │
-        ├─────────────────────────────────────┤
-        │                                     │
-        ▼                                     ▼
-Performance Analysis                 Fairness Analysis
-        │                                     │
-        ├─────────────────────────────────────┤
-        │                                     │
-        ▼                                     ▼
-Concept Drift Analysis              Explainability Analysis
-        │                                     │
-        └──────────────────┬──────────────────┘
-                           │
-                           ▼
-                  Monitoring Results
-                           │
-                           ▼
-                   PostgreSQL Storage
-                           │
-                           ▼
-                  Dashboard Visualization
-                           │
-                           ▼
-                    Threshold Evaluation
-                           │
-                           ▼
-                     Alert Generation
-                           │
-                           ▼
-              Recommendations & Investigation
+Dataset Metadata
+```
+
+## Planned Monitoring APIs
+
+The monitoring layer is being expanded to support endpoints for:
+
+```text
+Data Quality
+Data Drift
+Concept Drift
+Performance
+Explainability
+Fairness
+Alerts
+Business Impact
+Monitoring History
 ```
 
 ---
 
-# 🧠 Monitoring Engine Design
+# 🐳 Docker-Based Deployment
 
-ML-Observe is designed around the principle that the observability platform should analyze the user's model rather than train a replacement model.
+The platform is structured around containerized services.
 
-The monitoring relationship is:
+A typical environment contains:
 
 ```text
-USER'S MODEL
-      │
-      │
-      ├──────────────┐
-      │              │
-      ▼              ▼
-Reference Data    Current Data
-      │              │
-      └──────┬───────┘
-             │
-             ▼
-      ML-Observe Engine
-             │
-             ├── Validate
-             ├── Predict
-             ├── Compare
-             ├── Measure
-             ├── Explain
-             └── Alert
-             │
-             ▼
-      Monitoring Dashboard
+Docker Compose
+     │
+     ├── Frontend
+     │
+     ├── Flask API
+     │
+     └── PostgreSQL
 ```
 
-ML-Observe does not replace the user's ML model.
+This approach provides a consistent development environment and makes the application easier to run across different machines.
 
-Its purpose is to observe:
+---
+
+# 🔄 ML Monitoring Lifecycle
+
+The intended end-to-end monitoring process is:
 
 ```text
-Is the data changing?
-
-Is model performance decreasing?
-
-Which features are drifting?
-
-Why are predictions changing?
-
-Are some groups affected differently?
-
-How serious is the degradation?
-
-What should the ML engineer investigate?
+1. Register User
+       ↓
+2. Upload ML Model
+       ↓
+3. Register Reference Dataset
+       ↓
+4. Upload Current Dataset
+       ↓
+5. Validate Data
+       ↓
+6. Generate Predictions
+       ↓
+7. Analyze Data Quality
+       ↓
+8. Detect Data Drift
+       ↓
+9. Evaluate Performance
+       ↓
+10. Analyze Explainability
+       ↓
+11. Evaluate Fairness
+       ↓
+12. Generate Alerts
+       ↓
+13. Estimate Business Impact
+       ↓
+14. Display Monitoring Dashboard
 ```
 
 ---
 
-# 🚀 Quick Start
+# 🧠 Monitoring Engine
+
+The monitoring engine is designed as a modular layer so that individual monitoring capabilities can evolve independently.
+
+```text
+                 Monitoring Engine
+                        │
+        ┌───────────────┼────────────────┐
+        ▼               ▼                ▼
+   Data Quality       Drift          Performance
+        │               │                │
+        ▼               ▼                ▼
+ Explainability     Fairness          Alerts
+                        │
+                        ▼
+                 Business Impact
+```
+
+This modular structure allows additional monitoring techniques and model integrations to be introduced over time.
+
+---
+
+# 🚀 Getting Started
 
 ## Prerequisites
 
-Install:
+Install the following before running the project:
 
-- Docker Desktop
-- Docker Compose
-- Git
-
-Optional for running services without Docker:
-
-- Python 3.11+
-- Node.js
-- PostgreSQL
+* Git
+* Node.js
+* npm
+* Python
+* Docker
+* Docker Compose
+* PostgreSQL-compatible environment
 
 ---
 
-## 1. Clone Repository
+## 1. Clone the Repository
 
 ```bash
-git clone <YOUR_REPOSITORY_CLONE_URL>
-
-cd ML-OBSERVE
+git clone https://github.com/PriyaChakane/AI-Sentinal.git
+cd AI-Sentinal
 ```
 
 ---
 
 ## 2. Configure Environment Variables
 
-Create a `.env` file in the project root.
+Create the required environment configuration for the backend.
 
 Example:
 
 ```env
-JWT_SECRET_KEY=replace-with-a-secure-secret
-
-APP_URL=http://localhost:3000
-
-NEXT_PUBLIC_API_URL=http://localhost:8000
-
-SMTP_SERVER=smtp.gmail.com
-
-SMTP_PORT=587
-
-SMTP_USERNAME=
-
-SMTP_PASSWORD=
+DATABASE_URL=postgresql://username:password@postgres:5432/mlobserve
+JWT_SECRET_KEY=your-secret-key
 ```
 
-Never commit:
+Use appropriate values for your local environment.
 
-- Real passwords
-- Database credentials
-- SMTP passwords
-- API keys
-- Production JWT secrets
+Do not commit sensitive credentials or secret keys to GitHub.
 
 ---
 
-## 3. Build Docker Containers
+## 3. Build the Containers
 
 ```bash
 docker compose build
 ```
 
-For a completely fresh rebuild:
-
-```bash
-docker compose build --no-cache
-```
-
 ---
 
-## 4. Start Application
+## 4. Start the Application
 
 ```bash
 docker compose up
 ```
 
-Or run in detached mode:
+To run the services in the background:
 
 ```bash
 docker compose up -d
@@ -1102,42 +818,18 @@ docker compose up -d
 
 ---
 
-## 5. Access Services
+## 5. Open the Application
 
-Frontend:
+After the services start, access the frontend through the configured application port.
 
-```text
-http://localhost:3000
-```
-
-Backend:
-
-```text
-http://localhost:8000
-```
-
-PostgreSQL:
-
-```text
-localhost:5432
-```
+The backend API will be available through the Flask service.
 
 ---
 
-## 6. Check Running Containers
+## 6. Verify Containers
 
 ```bash
-docker ps
-```
-
-Expected services:
-
-```text
-mlobserve_frontend
-
-mlobserve_backend
-
-mlobserve_db
+docker compose ps
 ```
 
 ---
@@ -1145,509 +837,258 @@ mlobserve_db
 ## 7. View Backend Logs
 
 ```bash
-docker logs mlobserve_backend
+docker compose logs backend
 ```
 
-Follow logs continuously:
+For continuous logs:
 
 ```bash
-docker logs -f mlobserve_backend
+docker compose logs -f backend
 ```
 
 ---
 
-## 8. Inspect PostgreSQL Tables
+## 8. Inspect PostgreSQL
+
+PostgreSQL can be accessed through the configured database container.
 
 ```bash
-docker exec mlobserve_db psql -U postgres -d mlobserve -c "\dt"
-```
-
-Check users:
-
-```bash
-docker exec mlobserve_db psql -U postgres -d mlobserve -c "SELECT id, email FROM users;"
+docker compose exec postgres psql -U postgres
 ```
 
 ---
 
-## 9. Stop Application
+## 9. Stop the Application
 
 ```bash
 docker compose down
 ```
 
-To remove containers and the PostgreSQL development volume:
-
-```bash
-docker compose down -v
-```
-
-> ⚠️ Removing the PostgreSQL volume deletes development database data.
-
 ---
 
-# 📊 Monitoring Example
+# 📊 Example Monitoring Scenario
 
-Consider a customer churn classification model.
+Consider a deployed customer-churn model.
 
-The model originally achieved:
+A new production dataset is uploaded to AI-Sentinel.
 
-```text
-Accuracy:   94.2%
-Precision:  92.1%
-Recall:     91.8%
-F1 Score:   91.9%
-```
-
-After receiving new production data:
+The platform can perform the following analysis:
 
 ```text
-Accuracy:   91.2%
-Precision:  88.8%
-Recall:     88.4%
-F1 Score:   88.6%
+Production Dataset
+       ↓
+Data Quality Check
+       ↓
+Feature Distribution Comparison
+       ↓
+Drift Detection
+       ↓
+Model Predictions
+       ↓
+Performance Evaluation
+       ↓
+Explainability Analysis
+       ↓
+Fairness Analysis
+       ↓
+Threshold Evaluation
+       ↓
+Alert Generation
+       ↓
+Dashboard
 ```
 
-The monitoring engine calculates:
-
-```text
-Accuracy Change:  -3.0%
-
-Precision Change: -3.3%
-
-Recall Change:    -3.4%
-
-F1 Change:        -3.3%
-```
-
-The system can then generate a monitoring event:
-
-```text
-Status:
-Performance Degradation Detected
-
-Severity:
-HIGH
-
-Possible Investigation:
-- Check feature distribution changes
-- Analyze drifted features
-- Compare false positives and false negatives
-- Review class-level performance
-- Inspect recent prediction explanations
-- Evaluate retraining requirements
-```
-
-The values above are an example of the intended monitoring workflow. Actual production dashboard values should be generated dynamically from uploaded models and datasets.
+This gives the user a single location to inspect different aspects of model health.
 
 ---
 
 # 🛣️ Development Roadmap
 
-## Phase 1 — Platform Foundation
+### Phase 1 — Platform Foundation
 
-- [x] Flask backend architecture
-- [x] Next.js frontend architecture
-- [x] React monitoring components
-- [x] TypeScript frontend
-- [x] PostgreSQL integration
-- [x] Dockerized backend
-- [x] Dockerized frontend
-- [x] Dockerized PostgreSQL
-- [x] Docker Compose orchestration
-- [x] Health-check routes
-- [x] Monitoring dashboard UI
+* Frontend dashboard
+* Flask backend
+* PostgreSQL integration
+* Docker environment
 
----
+### Phase 2 — Authentication
 
-## Phase 2 — Authentication
+* Registration
+* Login
+* JWT authentication
+* Protected routes
+* Password security
 
-- [x] User registration
-- [x] User login
-- [x] Password hashing
-- [x] JWT token generation
-- [x] Protected Flask routes
-- [x] Frontend authentication state
-- [x] Login interface
-- [x] Registration interface
-- [x] PostgreSQL user storage
+### Phase 3 — Model & Dataset Management
 
----
+* Model upload
+* Dataset upload
+* Metadata management
+* Model listing
+* Dataset validation
 
-## Phase 3 — Model & Dataset Management
+### Phase 4 — Monitoring Engine
 
-- [x] Upload directory architecture
-- [x] Separate model and dataset directories
-- [x] Upload blueprint foundation
-- [x] Docker upload-volume configuration
-- [ ] Complete authenticated model upload
-- [ ] Complete dataset upload
-- [ ] Model file-type validation
-- [ ] Dataset file-type validation
-- [ ] File-size validation
-- [ ] Save model metadata
-- [ ] Save dataset metadata
-- [ ] Display uploaded models dynamically
-- [ ] Display uploaded datasets dynamically
-- [ ] Associate datasets with models
-- [ ] Model deletion workflow
-- [ ] Dataset deletion workflow
-- [ ] Model version tracking
+* Prediction generation
+* Performance calculations
+* Monitoring APIs
+* Baseline comparison
 
----
+### Phase 5 — Data Quality & Drift
 
-## Phase 4 — Real Monitoring Engine
+* Schema validation
+* Missing-value analysis
+* Data quality scoring
+* PSI
+* KS test
+* Distribution analysis
 
-- [ ] Remove remaining hardcoded monitoring values
-- [ ] Load compatible uploaded model
-- [ ] Inspect model type
-- [ ] Inspect expected model features
-- [ ] Validate dataset schema
-- [ ] Select target column
-- [ ] Separate features and target
-- [ ] Generate model predictions
-- [ ] Calculate accuracy
-- [ ] Calculate precision
-- [ ] Calculate recall
-- [ ] Calculate F1 score
-- [ ] Calculate ROC-AUC where applicable
-- [ ] Generate confusion matrix
-- [ ] Calculate per-class metrics
-- [ ] Store monitoring results
-- [ ] Return metrics to frontend
-- [ ] Render dynamic monitoring charts
+### Phase 6 — Explainability & Fairness
+
+* SHAP integration
+* LIME integration
+* Feature importance
+* Group-level fairness metrics
+* Bias analysis
+
+### Phase 7 — Alerts & History
+
+* Configurable thresholds
+* Alert generation
+* Alert history
+* Monitoring history
+* Email notifications
+
+### Phase 8 — Production Preparation
+
+* Improved security
+* Logging
+* Monitoring reliability
+* Performance optimization
+* Deployment configuration
 
 ---
 
-## Phase 5 — Data Quality & Drift
+# 🔮 Intended Production Architecture
 
-- [ ] Missing-value analysis
-- [ ] Duplicate-row detection
-- [ ] Data-type validation
-- [ ] Schema-change detection
-- [ ] Numeric distribution comparison
-- [ ] Categorical distribution comparison
-- [ ] PSI calculation
-- [ ] KS test
-- [ ] Chi-Square test
-- [ ] Feature-level drift scores
-- [ ] Dataset-level drift score
-- [ ] Drift severity classification
-- [ ] Drifted-feature ranking
-- [ ] Dynamic drift visualization
-
----
-
-## Phase 6 — Explainability & Fairness
-
-- [ ] Native feature importance
-- [ ] Permutation importance
-- [ ] SHAP integration for compatible models
-- [ ] LIME integration
-- [ ] Local prediction explanation
-- [ ] Global explanation dashboard
-- [ ] Sensitive attribute configuration
-- [ ] Group-wise performance metrics
-- [ ] Demographic parity analysis
-- [ ] Equal opportunity analysis
-- [ ] Selection-rate comparison
-- [ ] Bias severity calculation
-- [ ] Fairness alert generation
-
----
-
-## Phase 7 — Alerts & Monitoring History
-
-- [ ] Configurable monitoring thresholds
-- [ ] Automatic alert generation
-- [ ] Alert severity classification
-- [ ] Alert history
-- [ ] Monitoring-run history
-- [ ] Alert acknowledgement
-- [ ] Email notifications
-- [ ] Model-health timeline
-- [ ] Historical metric comparison
-
----
-
-## Phase 8 — Production Readiness
-
-- [ ] User-specific model isolation
-- [ ] Secure artifact storage
-- [ ] API rate limiting
-- [ ] Upload malware scanning
-- [ ] Safe model execution isolation
-- [ ] Database connection pooling
-- [ ] Structured logging
-- [ ] Backend automated tests
-- [ ] Frontend component tests
-- [ ] Integration tests
-- [ ] CI/CD pipeline
-- [ ] Cloud deployment
-- [ ] Monitoring of the monitoring platform
-- [ ] Audit logging
-
----
-
-# 🔮 Target Production Architecture
-
-The long-term architecture extends the current application into a complete monitoring lifecycle.
+The longer-term architecture is designed around a continuous ML monitoring workflow:
 
 ```text
-ML Development Pipeline
-          │
-          ▼
-      Trained Model
-          │
-          ▼
-      Model Registry
-          │
-          ▼
-        Deployment
-          │
-          ▼
- Production Predictions
-          │
-          ├──────────────────┐
-          │                  │
-          ▼                  ▼
-   Production Data      Ground Truth
-          │                  │
-          └────────┬─────────┘
-                   │
-                   ▼
-           ML-Observe Platform
-                   │
-        ┌──────────┼───────────┐
-        │          │           │
-        ▼          ▼           ▼
-   Data Quality  Data Drift  Performance
-        │          │           │
-        ├──────────┼───────────┤
-        │          │           │
-        ▼          ▼           ▼
- Explainability  Fairness   Concept Drift
-        │          │           │
-        └──────────┼───────────┘
-                   │
-                   ▼
-             Health Scoring
-                   │
-                   ▼
-           Threshold Evaluation
-                   │
-                   ▼
-              Alert Engine
-                   │
-          ┌────────┴─────────┐
-          ▼                  ▼
-     Dashboard           Notifications
-          │
-          ▼
-      Investigation
-          │
-          ▼
- Retraining Decision
-          │
-          ▼
- Updated Model Version
+                    ML Model
+                       │
+                       ▼
+               Production System
+                       │
+                       ▼
+                Prediction Data
+                       │
+                       ▼
+              Monitoring Pipeline
+                       │
+       ┌───────────────┼────────────────┐
+       ▼               ▼                ▼
+   Data Quality      Drift         Performance
+       │               │                │
+       └───────────────┼────────────────┘
+                       ▼
+                Explainability
+                       │
+                       ▼
+                  Fairness
+                       │
+                       ▼
+                    Alerts
+                       │
+                       ▼
+               Business Impact
+                       │
+                       ▼
+                 ML Dashboard
 ```
 
 ---
 
-# 🔐 Security Considerations
+# 🔐 Security Notes
 
-Machine learning model upload platforms require additional security precautions beyond normal file-upload applications.
+The platform includes several security considerations:
 
-Before production deployment, ML-Observe should include:
+* JWT-based authentication
+* Password hashing
+* Protected API routes
+* Environment-based configuration
+* Database-backed user management
+* Validation of uploaded files
+* Controlled access to model resources
 
-- Environment-based secret management
-- Strong JWT secret configuration
-- Authentication on all upload routes
-- Authentication on monitoring routes
-- User-specific model isolation
-- User-specific dataset isolation
-- File-extension validation
-- MIME-type validation
-- Maximum file-size enforcement
-- Secure filename generation
-- Dataset sanitization
-- API rate limiting
-- Audit logging
-- HTTPS
-- Secure object storage
-- Database connection pooling
-- Model execution isolation
-
-### ⚠️ Important Model Serialization Warning
-
-Pickle and Joblib files can execute arbitrary Python code during deserialization.
-
-Therefore:
-
-```text
-Uploaded Artifact
-        │
-        ▼
-Security Validation
-        │
-        ▼
-Trusted Artifact Check
-        │
-        ▼
-Isolated Execution Environment
-        │
-        ▼
-Model Loading
-```
-
-A production monitoring platform should never blindly load untrusted Pickle or Joblib artifacts directly inside the main web backend process.
-
-The current project is intended for controlled development and research environments while safe artifact execution architecture is developed.
+Sensitive configuration values should always remain outside source control.
 
 ---
 
-# ⚠️ Current Limitations
+## ⚠️ Model Serialization Warning
 
-ML-Observe is under active development.
+Pickle and Joblib files should only be loaded when their source is trusted.
 
-The frontend currently contains monitoring interfaces for:
+Loading an untrusted serialized ML model can execute malicious code.
 
-- Dashboard Overview
-- Model Management
-- Data Quality
-- Data Drift
-- Concept Drift
-- Performance Monitoring
-- Explainability
-- Bias Monitoring
-- Alert Management
-- Business Impact
-
-The current backend integration process is focused on connecting these interfaces to monitoring results calculated from actual uploaded models and datasets.
-
-Not every ML framework can be monitored using a single universal model loader.
-
-Different model formats require separate adapters:
-
-```text
-.pkl / .joblib
-        │
-        ▼
-scikit-learn Adapter
-
-
-.h5
-        │
-        ▼
-TensorFlow / Keras Adapter
-
-
-.pt
-        │
-        ▼
-PyTorch Adapter
-
-
-.onnx
-        │
-        ▼
-ONNX Runtime Adapter
-```
-
-The first complete monitoring pipeline focuses on compatible tabular classification models before expanding to additional frameworks and model types.
+For production environments, uploaded model files should be validated and handled using appropriate security controls.
 
 ---
 
-# 🎯 Vision
+# ⚠️ Current Development Limitations
 
-ML-Observe is not intended to be only a static collection of monitoring dashboards.
+AI-Sentinel is under active development.
 
-The long-term goal is to create an end-to-end ML observability platform capable of:
+Some monitoring modules currently contain frontend visualization or demonstration logic while backend integration is being developed.
 
-- Accepting user-owned ML models
-- Managing multiple model versions
-- Accepting reference and production datasets
-- Validating model-data compatibility
-- Evaluating model performance
-- Detecting data-quality problems
-- Detecting feature distribution drift
-- Detecting model performance degradation
-- Tracking concept drift
-- Explaining prediction behavior
-- Comparing feature importance over time
-- Evaluating fairness across groups
-- Generating actionable monitoring alerts
-- Maintaining historical monitoring runs
-- Comparing model versions
-- Connecting technical degradation with business impact
-- Supporting data-driven model retraining decisions
+Current limitations may include:
 
-The goal is to extend the ML lifecycle from:
+* Some dashboard metrics are demonstration values
+* Monitoring APIs are still being expanded
+* Model compatibility depends on the framework
+* Explainability methods depend on model support
+* Fairness metrics require suitable sensitive attributes
+* Business impact calculations require domain-specific configuration
+* Production-scale monitoring infrastructure is still under development
 
-```text
-Train → Evaluate → Deploy
-```
+The project is therefore best viewed as a development-stage ML observability platform rather than a finished production monitoring service.
 
-to:
+---
 
-```text
-Train
-  ↓
-Evaluate
-  ↓
-Deploy
-  ↓
-Observe
-  ↓
-Detect
-  ↓
-Explain
-  ↓
-Alert
-  ↓
-Investigate
-  ↓
-Improve
-```
+# 🎯 Project Vision
 
-> **Train the model once. Observe its behavior continuously.**
+AI-Sentinel aims to provide a unified environment where teams can continuously inspect ML systems after deployment.
+
+The long-term objective is to make it easier to:
+
+* Identify data changes
+* Detect model degradation
+* Investigate prediction behavior
+* Examine fairness metrics
+* Track monitoring history
+* Receive actionable alerts
+* Understand possible business consequences
+
+The platform combines these capabilities into one monitoring workflow instead of requiring separate tools for every stage of the ML lifecycle.
 
 ---
 
 # 👩‍💻 Author
 
-**Bhumi Boinwad**
+**Priya Chakane**
 
-B.Tech — Artificial Intelligence & Data Science
+Artificial Intelligence & Data Science
 
-Areas of interest:
-
-- Artificial Intelligence
-- Machine Learning
-- MLOps
-- ML Observability
-- Explainable AI
-- Responsible AI
-- Generative AI
-- Full-Stack Development
+GitHub:
+https://github.com/PriyaChakane
 
 ---
 
 ## ⭐ Support
 
-If you find ML-Observe useful or interesting, consider starring the repository.
-
-Architecture suggestions, monitoring ideas, contributions, and issue reports are welcome.
+If you find the project useful, consider giving the repository a star and exploring the implementation.
 
 ---
 
-<div align="center">
+# ⚡ AI-Sentinel
 
-# ⚡ ML-Observe
-
-### Monitor Models. Detect Drift. Explain Decisions. Protect Performance.
-
-**Full-Stack Machine Learning Observability Platform**
-
-</div>
+### Monitor Models. Understand Changes. Investigate Predictions. Improve ML Reliability.
